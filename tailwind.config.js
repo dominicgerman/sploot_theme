@@ -8,6 +8,7 @@ module.exports = {
       white: colors.white,
       black: 'rgb(33, 33, 33)',
       gray: 'rgb(162, 162, 162)',
+      darkGray: 'rgb(96, 96, 96)',
       orange: 'rgb(252, 73, 36)',
     },
     fontFamily: {
