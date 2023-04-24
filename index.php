@@ -2,13 +2,13 @@
 
 get_header(); ?>
 
-<div class="max-w-4xl mx-auto px-4">
+<div class="">
 
   <!-- example react component -->
   <div id="render-react-here"></div>
   <!-- end example react component -->
 
-  <div class="prose max-w-full">
+  <!-- <div class="prose max-w-full">
     <?php if (have_posts()) {
       while (have_posts()) {
         the_post(); ?>
@@ -18,7 +18,7 @@ get_header(); ?>
         </div>
     <?php }
     } ?>
-  </div>
+  </div> -->
 </div>
 
 <?php get_footer();

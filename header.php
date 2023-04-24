@@ -11,7 +11,7 @@
 
   <?php
   $parentId = wp_get_post_parent_id(get_the_ID());
-  $navActive = 'font-medium underline underline-offset-8 decoration-red-600 decoration-4'
+  $navActive = 'font-medium underline underline-offset-8 decoration-orange decoration-4'
   ?>
 
   <nav class="flex items-center shadow-sm h-20 px-20 justify-between">
