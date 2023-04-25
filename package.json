@@ -8,7 +8,7 @@
     "sync": "browser-sync start -p 'kodadesigns.local' --files '**/*.php' 'build/*.js' 'build/*.css'",
     "buildwp": "wp-scripts build",
     "build": "npm-run-all --sequential buildwp tailwindbuild",
-    "wpstart": "wp-scripts start src/index.js src/scripts/Banner.js",
+    "wpstart": "wp-scripts start src/index.js src/scripts/banner.js src/scripts/slide.js src/scripts/heading.js src/scripts/subheading.js",
     "start": "npm-run-all --parallel wpstart tailwindwatch",
     "tailwindbuild": "tailwindcss -i ./src/index.css -o ./build/index.css --minify",
     "tailwindwatch": "tailwindcss -i ./src/index.css -o ./build/index.css --watch --minify",

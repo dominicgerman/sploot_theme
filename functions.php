@@ -3,6 +3,7 @@
 function load_assets()
 {
   wp_enqueue_script('mainjs', get_theme_file_uri('/build/index.js'), array('wp-element'), '1.0', true);
+  wp_enqueue_style('googlefonts', 'https://fonts.googleapis.com/css2?family=Forum&family=Rubik:wght@400;500&display=swap', array(), null);
   wp_enqueue_style('maincss', get_theme_file_uri('/build/index.css'));
 }
 
@@ -39,3 +40,6 @@ class JSXBlock
 }
 
 new JSXBlock('banner');
+new JSXBlock('slide');
+new JSXBlock('heading');
+new JSXBlock('subheading');

@@ -8,14 +8,7 @@ while (have_posts()) {
 
 
     <div class="">
-
-        <!-- example react component -->
-        <div id="render-react-here"></div>
-        <!-- end example react component -->
-
-        <div class="prose max-w-full">
-            <?php the_content() ?>
-        </div>
+        <?php the_content() ?>
     </div>
 <? }
 

@@ -1,4 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Forum&family=Rubik:wght@400;500&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+/* DON'T USE IMPORT STATEMENT IF USING WP */
+/* @import url('https://fonts.googleapis.com/css2?family=Forum&family=Rubik:wght@400;500&display=swap'); */
