@@ -186,6 +186,13 @@ __webpack_require__.r(__webpack_exports__);
     size: {
       type: 'string',
       default: 'h-12 w-48 text-base'
+    },
+    backgroundColor: {
+      type: 'object',
+      default: {
+        name: 'black',
+        color: '#212121'
+      }
     }
   },
   edit: EditComponent,
@@ -210,6 +217,19 @@ function EditComponent(_ref) {
       linkObject: newLink
     });
   }
+  const ourColors = [{
+    name: 'black',
+    color: '#212121'
+  }, {
+    name: 'orange',
+    color: '#FC4924'
+  }];
+  function handleColorChange(colorCode) {
+    const currentColorObject = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.getColorObjectByColorValue)(ourColors, colorCode);
+    setAttributes({
+      backgroundColor: currentColorObject
+    });
+  }
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.BlockControls, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToolbarGroup, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToolbarButton, {
     onClick: buttonHandler,
     icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_4__["default"]
@@ -228,10 +248,17 @@ function EditComponent(_ref) {
     onClick: () => setAttributes({
       size: 'h-10 w-40 text-sm'
     })
-  }, "Small"))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.RichText, {
+  }, "Small"))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.InspectorControls, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
+    title: "Color",
+    initialOpen: true
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ColorPalette, {
+    colors: ourColors,
+    value: attributes.backgroundColor.color,
+    onChange: handleColorChange
+  })))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.RichText, {
     tagName: "div",
     allowedFormats: [],
-    className: `${attributes.size} flex items-center justify-center text-white font-bold bg-black/100 rounded-full`,
+    className: `${attributes.size} flex items-center justify-center text-white font-bold bg-${attributes.backgroundColor.name} rounded-full`,
     value: attributes.text,
     onChange: handleTextChange
   }), linkPickerVisible && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Popover, {
@@ -259,7 +286,7 @@ function SaveComponent(_ref2) {
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
     tagName: "button",
     value: attributes.text,
-    className: `${attributes.size} text-white font-bold bg-black/100 rounded-full`
+    className: `${attributes.size} text-white font-bold bg-${attributes.backgroundColor.name} rounded-full`
   }, attributes.text)));
 }
 }();

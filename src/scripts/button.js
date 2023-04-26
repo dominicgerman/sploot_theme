@@ -5,11 +5,16 @@ import {
   ToolbarButton,
   Popover,
   Button,
+  PanelBody,
+  PanelRow,
+  ColorPalette,
 } from '@wordpress/components'
 import {
   RichText,
   BlockControls,
+  InspectorControls,
   __experimentalLinkControl as LinkControl,
+  getColorObjectByColorValue,
 } from '@wordpress/block-editor'
 import { useState } from '@wordpress/element'
 
@@ -22,6 +27,10 @@ registerBlockType('blocktheme/button', {
       default: { url: '', opensInNewTab: false },
     },
     size: { type: 'string', default: 'h-12 w-48 text-base' },
+    backgroundColor: {
+      type: 'object',
+      default: { name: 'black', color: '#212121' },
+    },
   },
   edit: EditComponent,
   save: SaveComponent,
@@ -40,6 +49,16 @@ function EditComponent({ attributes, setAttributes }) {
 
   function handleLinkChange(newLink) {
     setAttributes({ linkObject: newLink })
+  }
+
+  const ourColors = [
+    { name: 'black', color: '#212121' },
+    { name: 'orange', color: '#FC4924' },
+  ]
+
+  function handleColorChange(colorCode) {
+    const currentColorObject = getColorObjectByColorValue(ourColors, colorCode)
+    setAttributes({ backgroundColor: currentColorObject })
   }
 
   return (
@@ -69,10 +88,21 @@ function EditComponent({ attributes, setAttributes }) {
           </ToolbarButton>
         </ToolbarGroup>
       </BlockControls>
+      <InspectorControls>
+        <PanelBody title="Color" initialOpen={true}>
+          <PanelRow>
+            <ColorPalette
+              colors={ourColors}
+              value={attributes.backgroundColor.color}
+              onChange={handleColorChange}
+            />
+          </PanelRow>
+        </PanelBody>
+      </InspectorControls>
       <RichText
         tagName="div"
         allowedFormats={[]}
-        className={`${attributes.size} flex items-center justify-center text-white font-bold bg-black/100 rounded-full`}
+        className={`${attributes.size} flex items-center justify-center text-white font-bold bg-${attributes.backgroundColor.name} rounded-full`}
         value={attributes.text}
         onChange={handleTextChange}
       />
@@ -113,7 +143,7 @@ function SaveComponent({ attributes }) {
         <button
           tagName="button"
           value={attributes.text}
-          className={`${attributes.size} text-white font-bold bg-black/100 rounded-full`}
+          className={`${attributes.size} text-white font-bold bg-${attributes.backgroundColor.name} rounded-full`}
         >
           {attributes.text}
         </button>

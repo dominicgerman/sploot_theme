@@ -15,7 +15,7 @@ function EditComponent({ attributes, setAttributes }) {
   return (
     <>
       <div className="mx-44 text-white">
-        <div className="">
+        <div className="absolute top-1/2 -translate-y-1/2">
           <InnerBlocks
             allowedBlocks={[
               'blocktheme/heading',
@@ -32,7 +32,7 @@ function EditComponent({ attributes, setAttributes }) {
 function SaveComponent() {
   return (
     <>
-      <div className="mx-44 text-white">
+      <div className="mx-44 text-white bg-black">
         <div className="absolute top-1/2 -translate-y-1/2">
           <InnerBlocks.Content />
         </div>
