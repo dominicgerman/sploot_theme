@@ -43,3 +43,4 @@ new JSXBlock('banner');
 new JSXBlock('slide');
 new JSXBlock('heading');
 new JSXBlock('subheading');
+new JSXBlock('button');

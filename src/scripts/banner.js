@@ -1,12 +1,5 @@
 import { registerBlockType } from '@wordpress/blocks'
-import { useEffect, useState } from '@wordpress/element'
-import { Button, PanelBody, PanelRow } from '@wordpress/components'
-import {
-  InnerBlocks,
-  InspectorControls,
-  MediaUpload,
-  MediaUploadCheck,
-} from '@wordpress/block-editor'
+import { InnerBlocks } from '@wordpress/block-editor'
 
 registerBlockType('blocktheme/banner', {
   title: 'Banner',
