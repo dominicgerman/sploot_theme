@@ -1,5 +1,7 @@
+import { useState } from '@wordpress/element'
 import { link } from '@wordpress/icons'
 import { registerBlockType } from '@wordpress/blocks'
+import { themeColors } from '../../inc/themeColors'
 import {
   ToolbarGroup,
   ToolbarButton,
@@ -16,7 +18,6 @@ import {
   __experimentalLinkControl as LinkControl,
   getColorObjectByColorValue,
 } from '@wordpress/block-editor'
-import { useState } from '@wordpress/element'
 
 registerBlockType('blocktheme/button', {
   title: 'Button',
@@ -51,13 +52,11 @@ function EditComponent({ attributes, setAttributes }) {
     setAttributes({ linkObject: newLink })
   }
 
-  const ourColors = [
-    { name: 'black', color: '#212121' },
-    { name: 'orange', color: '#FC4924' },
-  ]
-
   function handleColorChange(colorCode) {
-    const currentColorObject = getColorObjectByColorValue(ourColors, colorCode)
+    const currentColorObject = getColorObjectByColorValue(
+      themeColors,
+      colorCode
+    )
     setAttributes({ backgroundColor: currentColorObject })
   }
 
@@ -92,9 +91,11 @@ function EditComponent({ attributes, setAttributes }) {
         <PanelBody title="Color" initialOpen={true}>
           <PanelRow>
             <ColorPalette
-              colors={ourColors}
+              colors={themeColors}
               value={attributes.backgroundColor.color}
               onChange={handleColorChange}
+              disableCustomColors={true}
+              clearable={false}
             />
           </PanelRow>
         </PanelBody>
@@ -107,7 +108,10 @@ function EditComponent({ attributes, setAttributes }) {
         onChange={handleTextChange}
       />
       {linkPickerVisible && (
-        <Popover position="top center">
+        <Popover
+          position="top center"
+          onFocusOutside={() => setLinkPickerVisible(false)}
+        >
           <LinkControl
             settings={[
               {

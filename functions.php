@@ -23,23 +23,39 @@ add_action('after_setup_theme', 'add_support');
 class JSXBlock
 {
   var $name;
+  var $renderCallback;
 
-  function __construct($blockName)
+  function __construct($blockName, $renderCallback = null)
   {
     $this->name = $blockName;
+    $this->renderCallback = $renderCallback;
     add_action('init', [$this, 'onInit']);
+  }
+
+  function renderCallbackFunction($attributes, $content)
+  {
+    ob_start();
+    require get_theme_file_path("/src/scripts/{$this->name}.php");
+    return ob_get_clean();
   }
 
   function onInit()
   {
     wp_register_script($this->name, get_stylesheet_directory_uri() . "/build/{$this->name}.js", array('wp-blocks', 'wp-editor'));
-    register_block_type("blocktheme/{$this->name}", array(
+
+    $args = array(
       'editor_script' => $this->name
-    ));
+    );
+
+    if ($this->renderCallback) {
+      $args['render_callback'] = [$this, 'renderCallbackFunction'];
+    }
+
+    register_block_type("blocktheme/{$this->name}", $args);
   }
 }
 
-new JSXBlock('banner');
+new JSXBlock('banner', true);
 new JSXBlock('slide');
 new JSXBlock('heading');
 new JSXBlock('subheading');
